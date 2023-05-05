@@ -32,7 +32,7 @@
             bool numeroPrimo = true; //se estable la variable como "true"
             for (int i = 2; i < number; i++) //se evalua un ciclo
             {
-                if (number % 2 == 0)
+                if (number % i == 0)
                 {
                     numeroPrimo = false; //si cumple la condicion pasa a tener el valor "false"
                     break; //entonces termina la condicion
@@ -46,20 +46,6 @@
             {
                 Console.WriteLine("El numero ingresado no es primo");
             }
-
-            /*//IF-ELSE
-            //numero primo
-            bool numeroPrimo = true; //se estable la variable como "true"
-
-            if (number % 2 == 0)
-            {
-                numeroPrimo = false; //si el numero es "false" quiere decir que no lo es
-                Console.WriteLine("El numero ingresado no es primo");
-            }
-            else
-            {
-                Console.WriteLine("El numero ingresado es primo");
-            }*/
             
         }
     }

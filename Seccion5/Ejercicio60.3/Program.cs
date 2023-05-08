@@ -5,41 +5,45 @@
         static void Main(string[] args)
         {
             Console.Write("Ingrese el importe: ");
-            double importe = Convert.ToDouble(Console.ReadLine());
+            decimal importe = Convert.ToDecimal(Console.ReadLine());
 
             DesglosarImporte(importe);
 
-            Console.ReadLine();
+            Console.ReadKey();
+
         }
 
-        static void DesglosarImporte(double importe)
+        static void DesglosarImporte(decimal importe)
         {
-            int[] denominaciones = { 200, 100, 50, 20, 10, 5, 1 };
-            int[] cantidadDenominaciones = new int[denominaciones.Length];
+            int[] denominacionesBilletes = { 200, 100, 50, 20, 10, 5, 1 };
+            decimal[] denominacionesMonedas = { 0.5m, 0.25m, 0.1m, 0.05m, 0.01m };
 
-            int importeInt = (int)importe;
+            Console.WriteLine("Desglose de billetes:");
 
-            for (int i = 0; i < denominaciones.Length; i++)
+            foreach (int denominacion in denominacionesBilletes)
             {
-                if (importeInt >= denominaciones[i])
+                int cantidadBilletes = (int)(importe / denominacion);
+
+                if (cantidadBilletes > 0)
                 {
-                    cantidadDenominaciones[i] = importeInt / denominaciones[i];
-                    importeInt %= denominaciones[i];
+                    Console.WriteLine("{0} billetes de {1}", cantidadBilletes, denominacion);
+                    importe %= denominacion;
                 }
             }
 
-            Console.WriteLine("Desglose de importe:");
+            Console.WriteLine("Desglose de monedas:");
 
-            for (int i = 0; i < denominaciones.Length; i++)
+            foreach (decimal denominacion in denominacionesMonedas)
             {
-                if (cantidadDenominaciones[i] > 0)
+                int cantidadMonedas = (int)(importe / denominacion);
+
+                if (cantidadMonedas > 0)
                 {
-                    if (denominaciones[i] >= 5)
-                        Console.WriteLine($"{cantidadDenominaciones[i]} billetes de {denominaciones[i]}");
-                    else
-                        Console.WriteLine($"{cantidadDenominaciones[i]} monedas de {denominaciones[i]}");
+                    Console.WriteLine("{0} monedas de {1}", cantidadMonedas, denominacion.ToString("0.00"));
+                    importe %= denominacion;
                 }
             }
         }
+
     }
 }

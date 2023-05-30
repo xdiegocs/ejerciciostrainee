@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_Semana4
 {
-    internal class Biblioteca : IBiblioteca
+    public class Biblioteca : IBiblioteca
     {
         private List<Material> _materiales;
 
@@ -19,14 +19,13 @@ namespace Ejercicio_Semana4
         {
             if (material.GetType() == typeof(Libro))
             {
-                _materiales.Add(material);
                 Console.WriteLine($"Se ha agregado el libro '{material.Titulo}' a la Biblioteca");
             }
             else if (material.GetType() == typeof(Revista))
-            {
-                _materiales.Add(material);
+            {         
                 Console.WriteLine($"Se ha agregado la revista '{material.Titulo}' a la Biblioteca");
             }
+            _materiales.Add(material);
         }
 
         public List<Material> BuscarPorTitulo(string titulo)
@@ -48,7 +47,8 @@ namespace Ejercicio_Semana4
         {
             if (material.GetType() == typeof(Libro))
             {
-                material.Disponible = true;
+                Libro libro = (Libro)material;
+                libro.Devolver();
                 Console.WriteLine($"Se ha devuelto el libro '{material.Titulo}'");
             }
             else if (material.GetType() == typeof(Revista))
@@ -64,7 +64,8 @@ namespace Ejercicio_Semana4
             {
                 if (material.Disponible == true)
                 {
-                    material.Disponible = false;
+                    Libro libro = (Libro)material;
+                    libro.Prestar();
                     Console.WriteLine($"Se ha prestado el libro '{material.Titulo}'");
                 }
                 else
@@ -74,7 +75,8 @@ namespace Ejercicio_Semana4
             }
             else if (material.GetType() == typeof(Revista))
             {
-                material.Disponible = false;
+                Revista revista = (Revista)material;
+                revista.Prestar();
                 Console.WriteLine($"Se ha prestado la revista '{material.Titulo}'");
             }
         }        

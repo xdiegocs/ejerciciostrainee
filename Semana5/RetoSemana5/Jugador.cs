@@ -23,7 +23,6 @@ namespace Ejercicio_Semana5
                 using (FileStream fileStream = new FileStream(rutaArchivo, FileMode.Create))
                 {
                     bFormatter.Serialize(fileStream, this);
-                    Console.WriteLine("Los datos se han guardado exitosamente.");
                 }
             }
             catch (Exception ex)
@@ -41,7 +40,6 @@ namespace Ejercicio_Semana5
                 using (FileStream fileStream = new FileStream(rutaArchivo, FileMode.Open))
                 {
                     Jugador jugador = (Jugador)bFormatter.Deserialize(fileStream);
-                    Console.WriteLine("Los datos se han cargado exitosamente.");
                     return jugador;
                 }
             }
@@ -56,7 +54,7 @@ namespace Ejercicio_Semana5
         private static void RegistrarErrores(Exception ex)
         {
             string mensajeError = $"[{DateTime.Now}] Error: {ex.Message}";
-            File.AppendAllText("ErroresJugador/registro_errores.txt", mensajeError + Environment.NewLine);
+            File.AppendAllText("registro_errores.txt", mensajeError + Environment.NewLine);
         }
     }
 }

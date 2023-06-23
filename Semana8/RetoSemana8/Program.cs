@@ -27,17 +27,16 @@
 
                     case 2:
                         Console.Write("Ingresa el origen: ");
-                        string origen1 = Console.ReadLine();
+                        string origen1 = Console.ReadLine();                      
 
-                        List<string> destinos = flightManager.ObtenerDestinoPorOrigen(origen1);
-                        Console.WriteLine("Destinos relacionados:");
-
-                        if (destinos.Count > 0)
+                        if (true)
                         {
-                            foreach (string destino1 in destinos)
+                            /*foreach (string destino1 in destinos)
                             {
                                 Console.WriteLine(destino1);
-                            }
+                            }*/
+                            flightManager.ObtenerDestinoPorOrigen(origen1);
+                            Console.WriteLine("Destinos relacionados:");
                         }
                         else
                         {
@@ -49,15 +48,15 @@
                         Console.Write("Ingresa el destino: ");
                         string destino2 = Console.ReadLine();
 
-                        List<string> origenes = flightManager.ObtenerOrigenPorDestino(destino2);
-                        Console.WriteLine("Orígenes relacionados:");
-
-                        if (origenes.Count > 0)
+                        if (true)
                         {
-                            foreach (string origen2 in origenes)
+                            /*foreach (string origen2 in origenes)
                             {
                                 Console.WriteLine(origen2);
-                            }
+                            }*/
+
+                            flightManager.ObtenerOrigenPorDestino(destino2);
+                            Console.WriteLine("Orígenes relacionados:");
                         }
                         else
                         {

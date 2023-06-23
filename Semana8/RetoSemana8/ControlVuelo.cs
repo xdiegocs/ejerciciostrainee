@@ -92,44 +92,71 @@ namespace Ejercicio_Semana8
             }
         }
 
-        public List<string> ObtenerDestinoPorOrigen(string origen)
+        public void ObtenerDestinoPorOrigen(string origen)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            string query = "SELECT DISTINCT Destino FROM Vuelos WHERE Origen = @Origin";
+            string query = "SELECT Destino, Precio, Fecha, Aeropuerto FROM Vuelos WHERE Origen = @Origin";
             using SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Origin", origen);
 
-            List<string> destinos = new List<string>();
+            //List<string> destinos = new List<string>();
             using SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
             {
-                string destino = reader.GetString(0);
-                destinos.Add(destino);
-            }
+                Console.WriteLine("Vuelos encontrados con origen '{0}':", origen);
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("{0,-15} {1,-10} {2,-15} {3,-10}", "Destino", "Precio", "Fecha", "Aeropuerto");
+                Console.WriteLine("--------------------------------------------------");
 
-            return destinos;
+                while (reader.Read())
+                {
+                    string destino = reader.GetString(0);
+                    string precio = reader.GetString(1);
+                    string fecha = reader.GetString(2);
+                    string aeropuerto = reader.GetString(3);
+
+                    Console.WriteLine("{0,-15} {1,-10:C} {2,-15:d} {3,-10}", destino, precio, fecha, aeropuerto);
+                }
+            }
         }
 
-        public List<string> ObtenerOrigenPorDestino(string destino)
+        public void ObtenerOrigenPorDestino(string destino)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            string query = "SELECT DISTINCT Origen FROM Vuelos WHERE Destino = @Destination";
+            string query = "SELECT Origen, Precio, Fecha, Aeropuerto FROM Vuelos WHERE Destino = @Destination";
             using SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Destination", destino);
 
             List<string> origenes = new List<string>();
+            //using SqlDataReader reader = command.ExecuteReader();
+
             using SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            {
+                Console.WriteLine("Vuelos encontrados con destino '{0}':", destino);
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("{0,-15} {1,-10} {2,-15} {3,-10}", "Origen", "Precio", "Fecha", "Aeropuerto");
+                Console.WriteLine("--------------------------------------------------");
+
+                while (reader.Read())
+                {
+                    string origen = reader.GetString(0);
+                    string precio = reader.GetString(1);
+                    string fecha = reader.GetString(2);
+                    string aeropuerto = reader.GetString(3);
+
+                    Console.WriteLine("{0,-15} {1,-10:C} {2,-15:d} {3,-10}", origen, precio, fecha, aeropuerto);
+                }
+            }
+            /*while (reader.Read())
             {
                 string origen = reader.GetString(0);
                 origenes.Add(origen);
             }
 
-            return origenes;
+            return origenes;*/
         }
 
         private bool VerificarTablaExiste()

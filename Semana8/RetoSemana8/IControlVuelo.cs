@@ -10,7 +10,7 @@ namespace Ejercicio_Semana8
     {
         void CargarDatosDeCSV();
         void InsertDataIntoTable(List<Vuelo> vuelos);
-        List<string> ObtenerDestinoPorOrigen(string origen);
-        List<string> ObtenerOrigenPorDestino(string destino);
+        void ObtenerDestinoPorOrigen(string origen);
+        void ObtenerOrigenPorDestino(string destino);
     }
 }

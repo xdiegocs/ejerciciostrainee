@@ -30,11 +30,7 @@
                         string origen1 = Console.ReadLine();                      
 
                         if (true)
-                        {
-                            /*foreach (string destino1 in destinos)
-                            {
-                                Console.WriteLine(destino1);
-                            }*/
+                        {                          
                             flightManager.ObtenerDestinoPorOrigen(origen1);
                             Console.WriteLine("Destinos relacionados:");
                         }
@@ -50,11 +46,6 @@
 
                         if (true)
                         {
-                            /*foreach (string origen2 in origenes)
-                            {
-                                Console.WriteLine(origen2);
-                            }*/
-
                             flightManager.ObtenerOrigenPorDestino(destino2);
                             Console.WriteLine("Orígenes relacionados:");
                         }

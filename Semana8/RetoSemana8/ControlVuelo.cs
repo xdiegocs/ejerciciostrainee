@@ -101,7 +101,6 @@ namespace Ejercicio_Semana8
             using SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Origin", origen);
 
-            //List<string> destinos = new List<string>();
             using SqlDataReader reader = command.ExecuteReader();
             {
                 Console.WriteLine("Vuelos encontrados con origen '{0}':", origen);
@@ -130,9 +129,6 @@ namespace Ejercicio_Semana8
             using SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Destination", destino);
 
-            List<string> origenes = new List<string>();
-            //using SqlDataReader reader = command.ExecuteReader();
-
             using SqlDataReader reader = command.ExecuteReader();
             {
                 Console.WriteLine("Vuelos encontrados con destino '{0}':", destino);
@@ -149,14 +145,7 @@ namespace Ejercicio_Semana8
 
                     Console.WriteLine("{0,-15} {1,-10:C} {2,-15:d} {3,-10}", origen, precio, fecha, aeropuerto);
                 }
-            }
-            /*while (reader.Read())
-            {
-                string origen = reader.GetString(0);
-                origenes.Add(origen);
-            }
-
-            return origenes;*/
+            }         
         }
 
         private bool VerificarTablaExiste()

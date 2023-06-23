@@ -1,0 +1,4 @@
+Azure.Data.AppConfiguration(v. 1.2.0)
+CsvHelper(v. 30.0.1)
+Microsoft.Azure.Mobile.Client(v. 3.0.1)
+Microsoft.Data.SqlClient(v. 5.1.1)

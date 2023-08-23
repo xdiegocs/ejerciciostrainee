@@ -23,7 +23,7 @@ namespace Seccion27_Ejercicio1
         public void AgregarCita()
         {
             Console.WriteLine("Ingresa la fecha para la cita (dd/mm/yyyy):");
-            DateTime fecha = DateTime.Parse(Console.ReadLine());
+            String fecha = Convert.ToString(Console.ReadLine());
             Console.WriteLine("Introduce la descripcion de la cita:");
             string descripcion = Console.ReadLine();
             Console.WriteLine("Introduce el nombre del contacto:");
@@ -124,7 +124,7 @@ namespace Seccion27_Ejercicio1
             {
                 case 1:
                     Console.WriteLine("Ingresa la fecha (dd/mm/yyyy):");
-                    DateTime fechaConsulta = DateTime.Parse(Console.ReadLine());
+                    String fechaConsulta = Convert.ToString(Console.ReadLine());
                     List<Cita> citasEnFecha = BuscarCitasPorFecha(fechaConsulta);
                     if (citasEnFecha.Count == 0)
                     {
@@ -238,7 +238,7 @@ namespace Seccion27_Ejercicio1
             return contactosEncontrados;
         }
 
-        private List<Cita> BuscarCitasPorFecha(DateTime fecha)
+        private List<Cita> BuscarCitasPorFecha(String fecha)
         {
             List<Cita> citasEncontradas = new List<Cita>();
 
@@ -248,12 +248,12 @@ namespace Seccion27_Ejercicio1
                 while ((linea = sr.ReadLine()) != null)
                 {
                     string[] datos = linea.Split(';');
-                    DateTime fechaCita = DateTime.Parse(datos[0]);
-                    if (fechaCita.Date == fecha.Date)
+                    String fechaCita = (datos[0]);
+                    if (fechaCita == fecha)
                     {
                         Cita cita = new Cita
                         {
-                            Fecha = fechaCita,
+                            Fecha = Convert.ToString(fechaCita[0]),
                             Descripcion = datos[1],
                             ContactoId = int.Parse(datos[2])
                         };
@@ -280,7 +280,7 @@ namespace Seccion27_Ejercicio1
                     {
                         Cita cita = new Cita
                         {
-                            Fecha = DateTime.Parse(datos[0]),
+                            Fecha = datos[0],
                             Descripcion = datos[1],
                             ContactoId = id
                         };
@@ -294,13 +294,26 @@ namespace Seccion27_Ejercicio1
 
         private void MostrarCitas(List<Cita> citas)
         {
+            if (citas == null || citas.Count == 0)
+            {
+                Console.WriteLine("No hay citas para mostrar.");
+                return;
+            }
+
             foreach (Cita cita in citas)
             {
                 Console.WriteLine("-----------------------------");
                 Console.WriteLine($"Fecha: {cita.Fecha}");
                 Console.WriteLine($"Descripcion: {cita.Descripcion}");
                 Contacto contacto = _contactos.Find(c => c.Id == cita.ContactoId);
-                Console.WriteLine($"Contacto: {contacto.Nombre} {contacto.Apellidos}");
+                if (contacto != null)
+                {
+                    Console.WriteLine($"Contacto: {contacto.Nombre} {contacto.Apellidos}");
+                }
+                else
+                {
+                    Console.WriteLine("Contacto no encontrado.");
+                }
             }
             Console.WriteLine("-----------------------------");
         }
